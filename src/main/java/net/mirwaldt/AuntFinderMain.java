@@ -12,7 +12,7 @@ public class AuntFinderMain {
     public static void main(String[] args) throws IOException {
         final List<String> lines = Files.readAllLines(Path.of("input.txt"), StandardCharsets.US_ASCII);
         int auntCounter = 1;
-        final AuntFinder auntFinder = new DefaultAuntFinder();
+        final AuntFinder auntFinder = new MFCSAM_AuntFinder();
         for (String line : lines) {
             final String[] tokens = line.split(" ");
             final Aunt aunt = new Aunt(auntCounter);

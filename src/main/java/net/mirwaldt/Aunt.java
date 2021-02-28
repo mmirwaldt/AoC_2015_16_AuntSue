@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 public class Aunt {
-    private final static Logger logger = Logger.getLogger(Aunt.class.getName());
+//    private final static Logger logger = Logger.getLogger(Aunt.class.getName());
     private final int number;
     private final Map<AuntFeature, Integer> auntFeatures = new LinkedHashMap<>();
 
@@ -17,7 +17,7 @@ public class Aunt {
         auntFeatures.put(auntFeature, count);
     }
 
-    public boolean meetsProfile(Aunt auntProfile) {
+    public boolean meetsProfileMFCSAM(Aunt auntProfile) {
         for (Map.Entry<AuntFeature, Integer> auntFeatureEntry : auntFeatures.entrySet()) {
             final AuntFeature auntFeature = auntFeatureEntry.getKey();
             final Integer count = auntFeatureEntry.getValue();
