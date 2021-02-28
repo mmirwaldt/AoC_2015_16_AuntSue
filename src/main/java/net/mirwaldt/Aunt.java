@@ -18,14 +18,10 @@ public class Aunt {
     }
 
     public boolean meetsProfile(Aunt auntProfile) {
-        return checkExistingFeatures(auntProfile);
-    }
-
-    private boolean checkExistingFeatures(Aunt aunt) {
         for (Map.Entry<AuntFeature, Integer> auntFeatureEntry : auntFeatures.entrySet()) {
             final AuntFeature auntFeature = auntFeatureEntry.getKey();
             final Integer count = auntFeatureEntry.getValue();
-            if (!count.equals(aunt.auntFeatures.get(auntFeature))) {
+            if (!count.equals(auntProfile.auntFeatures.get(auntFeature))) {
 //                logger.info("Aunt " + number + " : " + auntFeature.name()
 //                        + " should be " + aunt.auntFeatures.get(auntFeature)
 //                        + " but is " + count + " - " + auntFeatures);
