@@ -11,7 +11,19 @@ import static net.mirwaldt.AuntFeature.*;
 public class AuntFinderMain {
     public static void main(String[] args) throws IOException {
         final List<String> lines = Files.readAllLines(Path.of("input.txt"), StandardCharsets.US_ASCII);
+        final Aunt auntProfile = createAuntProfile();
 
+        final AuntFinder auntFinder = new MFCSAM_AuntFinder();
+        addAunts(lines, auntFinder);
+        System.out.println(auntFinder.findAunt(auntProfile)); // result: 103
+
+
+        final AuntFinder partTwoAuntFinder = new RetroEncabulatorAuntFinder();
+        addAunts(lines, partTwoAuntFinder);
+        System.out.println(partTwoAuntFinder.findAunt(auntProfile)); // result: 405
+    }
+
+    private static Aunt createAuntProfile() {
         final Aunt auntProfile = new Aunt(0);
         auntProfile.addAuntFeature(CHILDREN, 3);
         auntProfile.addAuntFeature(CATS, 7);
@@ -23,16 +35,7 @@ public class AuntFinderMain {
         auntProfile.addAuntFeature(TREES, 3);
         auntProfile.addAuntFeature(CARS, 2);
         auntProfile.addAuntFeature(PERFUMES, 1);
-
-
-        final AuntFinder auntFinder = new MFCSAM_AuntFinder();
-        addAunts(lines, auntFinder);
-        System.out.println(auntFinder.findAunt(auntProfile)); // result: 103
-
-
-        final AuntFinder partTwoAuntFinder = new RetroEncabulatorAuntFinder();
-        addAunts(lines, partTwoAuntFinder);
-        System.out.println(partTwoAuntFinder.findAunt(auntProfile)); // result: 405
+        return auntProfile;
     }
 
     private static void addAunts(List<String> lines, AuntFinder auntFinder) {

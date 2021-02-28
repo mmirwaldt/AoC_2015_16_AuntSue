@@ -32,7 +32,7 @@ public abstract class AbstractAuntFinder implements AuntFinder {
         }
     }
 
-    public boolean meetsProfile(Aunt auntCandidate, Aunt auntProfile) {
+    private boolean meetsProfile(Aunt auntCandidate, Aunt auntProfile) {
         for (Map.Entry<AuntFeature, Integer> auntFeatureEntry : auntCandidate.getAuntFeatures().entrySet()) {
             final AuntFeature auntFeature = auntFeatureEntry.getKey();
             final Integer actualCount = auntFeatureEntry.getValue();
@@ -43,5 +43,6 @@ public abstract class AbstractAuntFinder implements AuntFinder {
         }
         return true;
     }
+
     protected abstract boolean isWrong(AuntFeature auntFeature, Integer actualCount, Integer expectedCount);
 }
