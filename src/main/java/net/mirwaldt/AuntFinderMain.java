@@ -11,8 +11,32 @@ import static net.mirwaldt.AuntFeature.*;
 public class AuntFinderMain {
     public static void main(String[] args) throws IOException {
         final List<String> lines = Files.readAllLines(Path.of("input.txt"), StandardCharsets.US_ASCII);
-        int auntCounter = 1;
+
+        final Aunt auntProfile = new Aunt(0);
+        auntProfile.addAuntFeature(CHILDREN, 3);
+        auntProfile.addAuntFeature(CATS, 7);
+        auntProfile.addAuntFeature(SAMOYEDS, 2);
+        auntProfile.addAuntFeature(POMERANIANS, 3);
+        auntProfile.addAuntFeature(AKITAS, 0);
+        auntProfile.addAuntFeature(VIZSLAS, 0);
+        auntProfile.addAuntFeature(GOLDFISH, 5);
+        auntProfile.addAuntFeature(TREES, 3);
+        auntProfile.addAuntFeature(CARS, 2);
+        auntProfile.addAuntFeature(PERFUMES, 1);
+
+
         final AuntFinder auntFinder = new MFCSAM_AuntFinder();
+        addAunts(lines, auntFinder);
+        System.out.println(auntFinder.findAunt(auntProfile)); // result: 103
+
+
+        final AuntFinder partTwoAuntFinder = new RetroEncabulatorAuntFinder();
+        addAunts(lines, partTwoAuntFinder);
+        System.out.println(partTwoAuntFinder.findAunt(auntProfile)); // result: 405
+    }
+
+    private static void addAunts(List<String> lines, AuntFinder auntFinder) {
+        int auntCounter = 1;
         for (String line : lines) {
             final String[] tokens = line.split(" ");
             final Aunt aunt = new Aunt(auntCounter);
@@ -32,19 +56,5 @@ public class AuntFinderMain {
             auntFinder.addAunt(aunt);
             auntCounter++;
         }
-
-        final Aunt auntProfile = new Aunt(0);
-        auntProfile.addAuntFeature(CHILDREN, 3);
-        auntProfile.addAuntFeature(CATS, 7);
-        auntProfile.addAuntFeature(SAMOYEDS, 2);
-        auntProfile.addAuntFeature(POMERANIANS, 3);
-        auntProfile.addAuntFeature(AKITAS, 0);
-        auntProfile.addAuntFeature(VIZSLAS, 0);
-        auntProfile.addAuntFeature(GOLDFISH, 5);
-        auntProfile.addAuntFeature(TREES, 3);
-        auntProfile.addAuntFeature(CARS, 2);
-        auntProfile.addAuntFeature(PERFUMES, 1);
-
-        System.out.println(auntFinder.findAunt(auntProfile)); // result: 103
     }
 }
