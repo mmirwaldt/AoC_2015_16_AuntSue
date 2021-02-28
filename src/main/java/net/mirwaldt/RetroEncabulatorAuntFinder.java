@@ -1,24 +1,16 @@
 package net.mirwaldt;
 
-import java.util.Arrays;
-
 public class RetroEncabulatorAuntFinder extends AbstractAuntFinder {
     @Override
-    public int findAunt(Aunt auntProfile) {
-        Aunt foundAunt = null;
-        for (Aunt aunt : aunts) {
-            if (aunt.meetsProfileRetroEncabulator(auntProfile)) {
-                if (foundAunt == null) {
-                    foundAunt = aunt;
-                } else {
-                    throw new IllegalArgumentException("Another aunt found. " + Arrays.asList(foundAunt, aunt));
-                }
-            }
-        }
-        if (foundAunt == null) {
-            return -1;
+    protected boolean isWrong(AuntFeature auntFeature, Integer actualCount, Integer expectedCount) {
+        if(auntFeature.equals(AuntFeature.CATS)
+                || auntFeature.equals(AuntFeature.TREES)) {
+            return actualCount <= expectedCount;
+        } else if(auntFeature.equals(AuntFeature.POMERANIANS)
+                || auntFeature.equals(AuntFeature.GOLDFISH)) {
+            return actualCount >= expectedCount;
         } else {
-            return foundAunt.getNumber();
+            return !actualCount.equals(expectedCount);
         }
     }
 }

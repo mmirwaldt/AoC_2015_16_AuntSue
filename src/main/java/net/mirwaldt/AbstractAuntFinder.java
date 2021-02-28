@@ -1,7 +1,9 @@
 package net.mirwaldt;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public abstract class AbstractAuntFinder implements AuntFinder {
     protected final List<Aunt> aunts = new ArrayList<>(500);
@@ -12,16 +14,34 @@ public abstract class AbstractAuntFinder implements AuntFinder {
     }
 
     @Override
-    public String toString() {
-        final StringBuilder stringBuilder = new StringBuilder();
-        for (Aunt aunt : aunts) {
-            stringBuilder
-                    .append("Sue ")
-                    .append(aunt.getNumber())
-                    .append(": ")
-                    .append(aunt.featuresToString())
-                    .append("\n");
+    public int findAunt(Aunt auntProfile) {
+        Aunt foundAunt = null;
+        for (Aunt auntCandidate : aunts) {
+            if (meetsProfile(auntCandidate, auntProfile)) {
+                if (foundAunt == null) {
+                    foundAunt = auntCandidate;
+                } else {
+                    throw new IllegalArgumentException("Another aunt found. " + Arrays.asList(foundAunt, auntCandidate));
+                }
+            }
         }
-        return stringBuilder.toString();
+        if (foundAunt == null) {
+            return -1;
+        } else {
+            return foundAunt.getNumber();
+        }
     }
+
+    public boolean meetsProfile(Aunt auntCandidate, Aunt auntProfile) {
+        for (Map.Entry<AuntFeature, Integer> auntFeatureEntry : auntCandidate.getAuntFeatures().entrySet()) {
+            final AuntFeature auntFeature = auntFeatureEntry.getKey();
+            final Integer actualCount = auntFeatureEntry.getValue();
+            final Integer expectedCount = auntProfile.getAuntFeatures().get(auntFeature);
+            if(isWrong(auntFeature, actualCount, expectedCount)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    protected abstract boolean isWrong(AuntFeature auntFeature, Integer actualCount, Integer expectedCount);
 }
