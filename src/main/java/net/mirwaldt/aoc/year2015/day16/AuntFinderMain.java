@@ -1,4 +1,4 @@
-package net.mirwaldt;
+package net.mirwaldt.aoc.year2015.day16;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-import static net.mirwaldt.AuntFeature.*;
+import static net.mirwaldt.aoc.year2015.day16.AuntFeature.*;
 
 public class AuntFinderMain {
     public static void main(String[] args) throws IOException {

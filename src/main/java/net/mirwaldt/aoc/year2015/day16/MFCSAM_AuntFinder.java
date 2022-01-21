@@ -1,4 +1,4 @@
-package net.mirwaldt;
+package net.mirwaldt.aoc.year2015.day16;
 
 public class MFCSAM_AuntFinder extends AbstractAuntFinder {
     @Override
